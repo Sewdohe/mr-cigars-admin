@@ -1,16 +1,42 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button'
-import { AppComponent } from '../app.component';
+import { AppComponent } from './app.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { environment } from '../environments/environment';
+import { provideAuth,getAuth } from '@angular/fire/auth';
+import { provideFirestore,getFirestore } from '@angular/fire/firestore';
+import { provideMessaging,getMessaging } from '@angular/fire/messaging';
+import { OrdersComponent } from './orders/orders.component';
+import { OrderComponent } from './order/order.component';
+import { AppRoutingModule } from './app-routing-module'
+import {MatTableModule} from '@angular/material/table';
+import {MatIconModule} from '@angular/material/icon'
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    AppComponent,
+    OrdersComponent,
+    OrderComponent
+  ],
   imports: [
     CommonModule,
-    MatButtonModule
+    MatButtonModule,
+    BrowserAnimationsModule,
+    AppRoutingModule,
+    MatTableModule,
+    MatIconModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideAuth(() => getAuth()),
+    provideFirestore(() => getFirestore()),
+    provideMessaging(() => getMessaging())
   ],
   exports: [
-    MatButtonModule
+    MatButtonModule,
+    DatePipe,
+    MatTableModule,
+    MatIconModule
   ],
   bootstrap: [
     AppComponent

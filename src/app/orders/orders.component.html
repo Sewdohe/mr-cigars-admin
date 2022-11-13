@@ -1,0 +1,7 @@
+<div *ngFor="let order of orders">
+  <h2 [routerLink]="['/order', order.id]">{{order.customer}} - {{order.total | currency}}</h2>
+</div>
+
+<div *ngIf="orders?.length == 0">
+  <h2>No Orders for Review!</h2>
+</div>
