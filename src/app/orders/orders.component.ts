@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Firestore, collectionData, collection, CollectionReference, Query, where, query } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
+import { TauriService } from '../services/tauri.service';
 import { Product, FirebaseCart, FirebaseCartLine, FirebaseOrder } from '../types'
 
 @Component({
@@ -12,7 +13,7 @@ export class OrdersComponent implements OnInit {
   orders$: Observable<any[]> | null = null;
   orders: FirebaseOrder[] | null = null;
 
-  constructor(private firestore: Firestore) {
+  constructor(private firestore: Firestore, private tauri: TauriService) {
     let ordersCollection = collection(this.firestore, 'orders');
     let pendingOrdersQuery = query(ordersCollection, where("status", "==", "Pending Review"))
     this.orders$ = collectionData(pendingOrdersQuery)
@@ -21,6 +22,10 @@ export class OrdersComponent implements OnInit {
 
   ngOnInit(): void {
 
+  }
+
+  sendNotif() {
+    this.tauri.sendNotification({title: 'Test Notification', body: 'This is a sample notification'})
   }
 
 }

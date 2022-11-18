@@ -1,58 +1,62 @@
-<h1>Viewing: {{this.order?.customer}}'s order</h1>
-<h1>Placed on {{this.orderDatePretty | date}}</h1>
+<mat-card *ngIf="!orderReviewed; else notReviewed" class="card-container">
+  <mat-card-header>
+    <h1>Viewing: {{this.order?.customer}}'s order -</h1>
+    <h1>Placed on {{this.orderDatePretty | date}}</h1>
+  </mat-card-header>
+  
+  <table mat-table [dataSource]="order!.cart" class="mat-elevation-z8">
+  
+    <!-- Item Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Item </th>
+      <td mat-cell *matCellDef="let element"> {{element.itemName}} </td>
+    </ng-container>
+  
+    <!-- Price Column -->
+    <ng-container matColumnDef="flavor">
+      <th mat-header-cell *matHeaderCellDef> Flavor </th>
+      <td mat-cell *matCellDef="let element"> {{element?.variation[0]}} </td>
+    </ng-container>
+  
+    <!-- Price Column -->
+    <ng-container matColumnDef="price">
+      <th mat-header-cell *matHeaderCellDef> Price </th>
+      <td mat-cell *matCellDef="let element"> {{element?.itemPrice | currency}} </td>
+    </ng-container>
+  
+    <!-- Quantity Column -->
+    <ng-container matColumnDef="quantity">
+      <th mat-header-cell *matHeaderCellDef> Quantity </th>
+      <td mat-cell *matCellDef="let element"> {{element.quantity}} </td>
+    </ng-container>
+  
+    <!-- Modifier Column -->
+    <ng-container matColumnDef="modifier">
+      <th mat-header-cell *matHeaderCellDef> Modifier </th>
+      <td mat-cell *matCellDef="let element; let i = index;"> 
+        <button (click)="decrementModifier(i)" mat-icon-button aria-label="Example icon button with a vertical three dot icon">
+          <mat-icon>remove</mat-icon>
+        </button>
+        {{element.modifier}}
+        <button mat-icon-button (click)="incrementModifier(i)" aria-label="Example icon button with a vertical three dot icon">
+          <mat-icon>add</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+  
+    <!-- Total Column -->
+    <ng-container matColumnDef="total">
+      <th mat-header-cell *matHeaderCellDef> Total </th>
+      <td mat-cell *matCellDef="let element"> {{element.quantity * element.itemPrice | currency}} </td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  
+  <button mat-button (click)="confirmUpdatedInvoice()">Confirm New Order</button>
+</mat-card>
 
-<table mat-table [dataSource]="order!.cart" class="mat-elevation-z8">
-
-  <!--- Note that these columns can be defined in any order.
-        The actual rendered columns are set as a property on the row definition" -->
-
-  <!-- Item Column -->
-  <ng-container matColumnDef="name">
-    <th mat-header-cell *matHeaderCellDef> Item </th>
-    <td mat-cell *matCellDef="let element"> {{element.itemName}} </td>
-  </ng-container>
-
-  <!-- Price Column -->
-  <ng-container matColumnDef="flavor">
-    <th mat-header-cell *matHeaderCellDef> Flavor </th>
-    <td mat-cell *matCellDef="let element"> {{element?.variation[0]}} </td>
-  </ng-container>
-
-  <!-- Price Column -->
-  <ng-container matColumnDef="price">
-    <th mat-header-cell *matHeaderCellDef> Price </th>
-    <td mat-cell *matCellDef="let element"> {{element?.itemPrice | currency}} </td>
-  </ng-container>
-
-  <!-- Quantity Column -->
-  <ng-container matColumnDef="quantity">
-    <th mat-header-cell *matHeaderCellDef> Quantity </th>
-    <td mat-cell *matCellDef="let element"> {{element.quantity}} </td>
-  </ng-container>
-
-  <!-- Modifier Column -->
-  <ng-container matColumnDef="modifier">
-    <th mat-header-cell *matHeaderCellDef> Modifier </th>
-    <td mat-cell *matCellDef="let element; let i = index;"> 
-      <button (click)="decrementModifier(i)" mat-icon-button aria-label="Example icon button with a vertical three dot icon">
-        <mat-icon>remove</mat-icon>
-      </button>
-      {{element.modifier}}
-      <button mat-icon-button (click)="incrementModifier(i)" aria-label="Example icon button with a vertical three dot icon">
-        <mat-icon>add</mat-icon>
-      </button>
-    </td>
-  </ng-container>
-
-  <!-- Total Column -->
-  <ng-container matColumnDef="total">
-    <th mat-header-cell *matHeaderCellDef> Total </th>
-    <td mat-cell *matCellDef="let element"> {{element.quantity * element.itemPrice | currency}} </td>
-  </ng-container>
-
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
-
-
-<button mat-button (click)="confirmUpdatedInvoice()">Confirm New Order</button>
+<ng-template #notReviewed>
+  <h1>Order Review Sent!</h1>
+</ng-template>

@@ -17,6 +17,7 @@ export class OrderComponent implements OnInit {
   orderDatePretty: Date | null = new Date()
   displayedColumns: string[] = ['name', 'flavor','price', 'quantity', 'modifier', 'total'];
   orderRef: DocumentReference | null = null;
+  orderReviewed: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -66,7 +67,7 @@ export class OrderComponent implements OnInit {
           order.cart = this.order.cart;
           order.status = "Reviewed"
         }
-        updateDoc(userRef, {orders: orders})
+        updateDoc(userRef, {orders: orders}).then(() => this.orderReviewed = true)
       })
     })
     
