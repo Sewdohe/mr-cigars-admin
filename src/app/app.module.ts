@@ -19,12 +19,18 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list'
 import { MatCardModule } from '@angular/material/card';
+import { ToolbarComponent } from './toolbar/toolbar.component';
+import { CustomersComponent } from './customers/customers.component';
+import { DashComponent } from './dash/dash.component';
 @NgModule({
   declarations: [
     AppComponent,
     OrdersComponent,
     OrderComponent,
-    NavComponent
+    NavComponent,
+    ToolbarComponent,
+    CustomersComponent,
+    DashComponent
   ],
   imports: [
     CommonModule,

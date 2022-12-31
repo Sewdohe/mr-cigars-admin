@@ -9,6 +9,12 @@ export interface FirebaseCartLine {
   id: string
 }
 
+export interface User {
+  cart: FirebaseCart,
+  email: string,
+  userName: string,
+  storeName: string
+}
 
 export interface FirebaseOrder {
   customer: string | null;

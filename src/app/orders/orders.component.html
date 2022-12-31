@@ -1,11 +1,13 @@
-<mat-card class="center-container order-card" *ngFor="let order of orders">
-    <h2 class="mat-heading" [routerLink]="['/order', order.id]">{{order.customer}} - {{order.total | currency}}</h2>
-    <p>placed on {{order.orderDate.seconds * 1000 | date}}</p>
-  <mat-card-actions>
-    <button mat-button [routerLink]="['/order', order.id]">Review Order</button>
-  </mat-card-actions>
-</mat-card>
-
-<div *ngIf="orders?.length == 0">
-  <h2>No Orders for Review!</h2>
+<div class="container">
+  <mat-card class="center-container order-card" *ngFor="let order of orders">
+      <h2 class="mat-heading" [routerLink]="['/order', order.id]">{{order.customer}} - {{order.total | currency}}</h2>
+      <p>placed on {{order.orderDate.seconds * 1000 | date}}</p>
+    <mat-card-actions>
+      <button mat-button [routerLink]="['/order', order.id]">Review Order</button>
+    </mat-card-actions>
+  </mat-card>
+  
+  <div *ngIf="orders?.length == 0">
+    <h2>No Orders for Review!</h2>
+  </div>
 </div>

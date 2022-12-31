@@ -1,0 +1,5 @@
+<mat-list role="list">
+  <mat-list-item *ngFor="let user of users$ | async">
+    {{user.storeName}}
+  </mat-list-item>
+</mat-list>

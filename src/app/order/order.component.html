@@ -4,7 +4,7 @@
     <h1>Placed on {{this.orderDatePretty | date}}</h1>
   </mat-card-header>
   
-  <table mat-table [dataSource]="order!.cart" class="mat-elevation-z8">
+  <table #invoice mat-table [dataSource]="order!.cart" id="invoice" class="mat-elevation-z8">
   
     <!-- Item Column -->
     <ng-container matColumnDef="name">
@@ -55,6 +55,7 @@
   </table>
   
   <button mat-button (click)="confirmUpdatedInvoice()">Confirm New Order</button>
+  <button mat-button (click)="openPDF()">Print Invoice</button>
 </mat-card>
 
 <ng-template #notReviewed>
