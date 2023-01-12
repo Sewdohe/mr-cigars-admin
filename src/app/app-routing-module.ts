@@ -12,7 +12,7 @@ const routes: Routes = [
     component: DashComponent
   },
   {
-    path: 'orders',
+    path: 'orders/:viewType',
     component: OrdersComponent
   },
   {

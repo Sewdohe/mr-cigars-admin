@@ -1,5 +1,4 @@
-import { Component } from "@angular/core";
-
+import { Component, OnInit } from "@angular/core";
 @Component({
   selector: "app-root",
   template: `
@@ -12,5 +11,9 @@ import { Component } from "@angular/core";
   standalone: false,
 })
 export class AppComponent {
+
+  ngOnInit(): void {
+
+  }
   
 }

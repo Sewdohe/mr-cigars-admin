@@ -21,12 +21,18 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
-            "assets": ["src/favicon.ico", "src/assets"],
+            "assets": [
+              "src/favicon.ico",
+              "src/assets",
+              "src/manifest.json",
+              "src/firebase-messaging-sw.js"
+            ],
             "styles": [
               "src/theme.scss",
               "src/style.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "serviceWorker": true
           },
           "configurations": {
             "production": {

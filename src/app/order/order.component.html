@@ -1,10 +1,10 @@
-<mat-card *ngIf="!orderReviewed; else notReviewed" class="card-container">
+<mat-card *ngIf="!orderReviewed; else notReviewed" id="invoice" class="card-container mat-elevation-z0">
   <mat-card-header>
     <h1>Viewing: {{this.order?.customer}}'s order -</h1>
     <h1>Placed on {{this.orderDatePretty | date}}</h1>
   </mat-card-header>
   
-  <table #invoice mat-table [dataSource]="order!.cart" id="invoice" class="mat-elevation-z8">
+  <table #invoice mat-table [dataSource]="order!.cart" class="mat-elevation-z0">
   
     <!-- Item Column -->
     <ng-container matColumnDef="name">

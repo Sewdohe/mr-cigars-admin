@@ -2,13 +2,13 @@
   <mat-sidenav #drawer class="sidenav" fixedInViewport
       [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
       [mode]="(isHandset$ | async) ? 'over' : 'side'"
-      [opened]="(isHandset$ | async) === false">
+       [opened]="(isHandset$ | async) === false">
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
       <a mat-list-item href="">Home Screen</a>
       <div mat-subheader>Orders</div>
-      <a mat-list-item class="indented" href="orders">Reviewed</a>
-      <a mat-list-item class="indented" href="orders">Needs review</a>
+      <a mat-list-item class="indented" [routerLink]="['/orders', 'Reviewed']">Completed</a>
+      <a mat-list-item class="indented" [routerLink]="['/orders', 'Pending Review']">Needs review</a>
       <div mat-subheader>Customers</div>
       <a mat-list-item class="indented" href="customers">View Customers</a>
     </mat-nav-list>

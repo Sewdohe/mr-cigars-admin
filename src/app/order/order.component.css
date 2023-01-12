@@ -3,6 +3,7 @@ table {
   margin-bottom: 1rem;
   border: 1px solid white;
   border-radius: 3px;
+  box-shadow: none !important;
 }
 
 :host {
@@ -12,3 +13,4 @@ table {
 .card-container {
   margin: 1rem;
 }
+

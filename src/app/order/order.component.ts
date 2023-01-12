@@ -46,7 +46,7 @@ export class OrderComponent implements OnInit {
   @ViewChild('invoice') invoice: ElementRef | null = null;
   pathTauri: string = ''
 
-  constructor(private route: ActivatedRoute, private firestore: Firestore) {}
+  constructor(private route: ActivatedRoute, private firestore: Firestore) { }
 
   ngOnInit(): void {
     const routeParams = this.route.snapshot.paramMap;
@@ -117,8 +117,7 @@ export class OrderComponent implements OnInit {
 
   public openPDF(): void {
     let DATA: any = document.getElementById('invoice');
-    let contents = ''
-    html2canvas(DATA).then(async (canvas) => {
+    html2canvas(DATA, { scale: 2 }).then(async (canvas) => {
       let fileWidth = 8.5;
       let fileHeight = (canvas.height * fileWidth) / canvas.width;
       const FILEURI = canvas.toDataURL('image/png');
@@ -126,9 +125,6 @@ export class OrderComponent implements OnInit {
       let position = 0;
       PDF.addImage(FILEURI, 'PNG', 0, position, fileWidth, fileHeight);
       PDF.save('invoice.pdf');
-      // contents = PDF.output()
-      // await save({}).then((data) => {this.pathTauri = data!;})
-      // await writeFile({ path: this.pathTauri, contents: contents });
     });
   }
 }

@@ -13,6 +13,7 @@ export const environment = {
     authDomain: 'mr-cigars.firebaseapp.com',
     messagingSenderId: '495206044541',
     measurementId: 'G-S78E69BDDF',
+    vapidKey: "BKSSMaQX_L713UQj5-QOXyXDZKECB7Fq-e-UMMNuztdpOxAt915O-H1iMNYaChB94QswmjvYjhm139LtQGZCzhY"
   },
   production: false,
 };
