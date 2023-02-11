@@ -16,9 +16,10 @@ export class DashComponent implements OnInit {
 
   ngOnInit(): void {
     this.request();
+    this.getAndStoreToken();
   }
 
-  constructor(@Optional() messaging: Messaging) {
+  constructor(@Optional() private messaging: Messaging) {
     console.log("messaging", messaging);
     if (messaging) {
       this.token$ = from(
@@ -28,17 +29,25 @@ export class DashComponent implements OnInit {
             getToken(messaging, {
               serviceWorkerRegistration,
               vapidKey: environment.firebase.vapidKey,
-            })
-          }
-          )
+            });
+          })
       ).pipe(
-        tap((token) => console.log("FCM", { token })),
+        tap((token) => {
+          console.log("FCM", { token })
+          console.warn('IM WORKING')
+        }),
         share()
       );
       this.message$ = new Observable((sub) =>
         onMessage(messaging, (it) => sub.next(it))
       ).pipe(tap((token) => console.log("FCM", { token })));
     }
+  }
+  
+  getAndStoreToken() {
+    this.token$.subscribe(token => {
+      console.log(token)
+    })
   }
 
   request() {
